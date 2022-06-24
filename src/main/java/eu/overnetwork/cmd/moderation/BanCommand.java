@@ -1,9 +1,7 @@
 package eu.overnetwork.cmd.moderation;
 
-import com.sun.xml.bind.v2.runtime.reflect.opt.Const;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
-import eu.overnetwork.core.Constant;
 import eu.overnetwork.util.CustomEmbedBuilder;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;

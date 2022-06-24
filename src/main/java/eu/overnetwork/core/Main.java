@@ -2,8 +2,9 @@ package eu.overnetwork.core;
 
 import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
-import eu.overnetwork.cmd.DocsCommand;
-import eu.overnetwork.cmd.WikiCommand;
+
+import eu.overnetwork.cmd.utils.DocsCommand;
+import eu.overnetwork.cmd.utils.WikiCommand;
 import eu.overnetwork.listeners.*;
 import eu.overnetwork.cfg.Settings;
 import com.vdurmont.emoji.EmojiParser;

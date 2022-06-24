@@ -1,11 +1,11 @@
-package eu.overnetwork.cmd;
+package eu.overnetwork.cmd.utils;
 
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
 import eu.overnetwork.core.Constant;
 import eu.overnetwork.listeners.CommandCleanupListener;
-import eu.overnetwork.util.wiki.parser.WikiPage.WikiPage;
-import eu.overnetwork.util.wiki.parser.WikiPage.WikiParser;
+import eu.overnetwork.util.wiki.parser.WikiPage;
+import eu.overnetwork.util.wiki.parser.WikiParser;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
