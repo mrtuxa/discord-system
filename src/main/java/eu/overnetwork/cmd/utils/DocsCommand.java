@@ -1,4 +1,4 @@
-package eu.overnetwork.cmd;
+package eu.overnetwork.cmd.utils;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
 import eu.overnetwork.core.Constant;

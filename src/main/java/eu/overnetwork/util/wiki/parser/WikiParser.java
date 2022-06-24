@@ -1,4 +1,4 @@
-package eu.overnetwork.util.wiki.parser.WikiPage;
+package eu.overnetwork.util.wiki.parser;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

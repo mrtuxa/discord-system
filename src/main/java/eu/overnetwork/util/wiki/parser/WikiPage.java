@@ -1,4 +1,4 @@
-package eu.overnetwork.util.wiki.parser.WikiPage;
+package eu.overnetwork.util.wiki.parser;
 
 public class WikiPage implements Comparable<WikiPage>{
     private final String title;
