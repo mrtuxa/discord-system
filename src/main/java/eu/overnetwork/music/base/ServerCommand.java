@@ -11,8 +11,10 @@ public abstract class ServerCommand implements MessageCreateListener {
     private String command;
     private final String prefix = "!";
 
-    public ServerCommand(String leave) {
+    protected ServerCommand(String command){
+        this.command = command;
     }
+
 
     @Override
     public void onMessageCreate(MessageCreateEvent messageCreateEvent) {
