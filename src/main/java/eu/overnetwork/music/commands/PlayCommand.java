@@ -20,7 +20,7 @@ public class PlayCommand extends ServerCommand {
     private final AudioPlayerManager manager = PlayerManager.getManager();
 
     public PlayCommand() {
-        super("!play");
+        super("play");
     }
 
     @Override
