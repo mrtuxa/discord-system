@@ -27,19 +27,14 @@ public class PlayCommand extends ServerCommand {
     protected void runCommand(MessageCreateEvent event, Server server, ServerTextChannel channel, User user, String[] args) {
         // Make sure the message have arguments above one (for example: play kano 2020 remix or play https://youtube.com/...).
         if(args.length > 1){
-             System.out.println("-1");
 
             // We first check if the user is in any voice channel.
             event.getMessageAuthor().getConnectedVoiceChannel().ifPresentOrElse(voiceChannel -> {
-                 System.out.println("0");
 
                 // We have checked that the user is in a channel, but can we see the channel, can we connect and can we speak on the channel?
                 if(voiceChannel.canYouConnect()){
-                    System.out.println("1");
                     if(voiceChannel.canYouSee()){
-                         System.out.println("2");
                         if(voiceChannel.hasPermission(event.getApi().getYourself(), PermissionType.SPEAK)){
-                             System.out.println("3");
 //  We retrieve the ServerMusicManager from the AudioManager class which will create it if it doesn't exist.
                     ServerMusicManager m = AudioManager.get(server.getId());
 
