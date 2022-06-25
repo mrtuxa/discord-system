@@ -1,13 +1,13 @@
 package eu.overnetwork.core;
 
-import de.btobastian.sdcf4j.CommandHandler;
-import de.btobastian.sdcf4j.handler.JavacordHandler;
-
-import eu.overnetwork.cmd.utils.DocsCommand;
-import eu.overnetwork.cmd.utils.WikiCommand;
 import eu.overnetwork.listeners.*;
 import eu.overnetwork.cfg.Settings;
 import com.vdurmont.emoji.EmojiParser;
+import eu.overnetwork.music.audio.PlayerManager;
+import eu.overnetwork.music.commands.LeaveCommand;
+import eu.overnetwork.music.commands.PlayCommand;
+import eu.overnetwork.music.commands.SkipCommand;
+import eu.overnetwork.music.commands.StopCommand;
 import eu.overnetwork.util.LatestVersionFinder;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.javacord.api.DiscordApi;
@@ -18,6 +18,7 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.interaction.MessageComponentInteraction;
+import org.javacord.api.util.logging.FallbackLoggerConfiguration;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -36,6 +37,8 @@ public class Main {
     private static final String english = ":flag_us:";
     public static void main(String[] args) {
 
+        PlayerManager.init();
+
         Settings cfg = new Settings();
         Dotenv dotenv = Dotenv.load();
         DiscordApi api = new DiscordApiBuilder()
@@ -47,19 +50,21 @@ public class Main {
 
         System.out.println("Connected with " + api.getYourself().getDiscriminatedName());
 
+        api.addServerVoiceChannelMemberLeaveListener(new ServerVoice());
+
         // Tool for finding the latest version.
         LatestVersionFinder versionFinder = new LatestVersionFinder(api);
 
-        CommandHandler handler = new JavacordHandler(api);
-        handler.registerCommand(new WikiCommand());
-        handler.registerCommand(new DocsCommand(versionFinder));
 
         api.addMessageDeleteListener(new CommandCleanupListener());
-        api.addMessageCreateListener(new TalkToJamesListener(handler));
         api.addMessageCreateListener(new VerifyListener());
         api.addListener(new Ping());
         api.addListener(new Rollen());
         api.addListener(new Language());
+        api.addListener(new PlayCommand());
+        api.addListener(new SkipCommand());
+        api.addListener(new StopCommand());
+        api.addListener(new LeaveCommand());
 
 
         Map<String, Long> namesMap = new HashMap<>();
