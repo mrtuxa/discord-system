@@ -17,7 +17,6 @@ public class Language implements MessageCreateListener {
     public void onMessageCreate(MessageCreateEvent event) {
         Settings cfg = new Settings();
         if (event.getMessageAuthor().canBanUsersFromServer() && event.getMessageContent().equalsIgnoreCase(cfg.getPrefix() + "language")) {
-           TextChannel channel = event.getMessage().getChannel();
             EmbedBuilder language = new EmbedBuilder()
                     .setTitle("Over-Network System")
                     .addField("Support", "Please choose your language for the support")

@@ -32,9 +32,10 @@ public class PlayCommand extends ServerCommand {
             event.getMessageAuthor().getConnectedVoiceChannel().ifPresentOrElse(voiceChannel -> {
 
                 // We have checked that the user is in a channel, but can we see the channel, can we connect and can we speak on the channel?
-                if(voiceChannel.canYouConnect() && voiceChannel.canYouSee() && voiceChannel.hasPermission(event.getApi().getYourself(), PermissionType.SPEAK)){
-
-                    //  We retrieve the ServerMusicManager from the AudioManager class which will create it if it doesn't exist.
+                if(voiceChannel.canYouConnect()){
+                    if(voiceChannel.canYouSee()){
+                        if(voiceChannel.hasPermission(event.getApi().getYourself(), PermissionType.SPEAK)){
+//  We retrieve the ServerMusicManager from the AudioManager class which will create it if it doesn't exist.
                     ServerMusicManager m = AudioManager.get(server.getId());
 
                     // We retrieve the URL or the query.
@@ -71,6 +72,10 @@ public class PlayCommand extends ServerCommand {
                             }
                         });
                     }
+                        }
+                    }
+
+                    
                 } else {
                     // Tell the user that we cannot connect, or see, or speak in the channel.
                     event.getChannel().sendMessage("Either I cannot connect, cannot see, or do not have the permission to speak on the channel.");

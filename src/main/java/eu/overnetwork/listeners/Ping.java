@@ -17,28 +17,27 @@ public class Ping implements MessageCreateListener {
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
         Settings cfg = new Settings();
-       if (event.getMessageContent().equalsIgnoreCase(cfg.getPrefix() + "ping")) {
-           Color PingEmbedColor = new Color(255, 0, 0);
-           long GatewayLatency =
+        if (event.getMessageContent().equalsIgnoreCase(cfg.getPrefix() + "ping")) {
+            Color pingEmbedColor = new Color(255, 0, 0);
+            long GatewayLatency =
                    event.getApi().getLatestGatewayLatency().toMillis();
-           CompletableFuture<Void> RESTLatency = event.getApi().measureRestLatency().thenAccept(Time -> {
-               EmbedBuilder InitialPing = new EmbedBuilder()
-                       .setTitle("***Testing Ping... :ping_pong: ***")
-                       .setColor(PingEmbedColor)
-                       .setFooter(event.getMessageAuthor().getDisplayName(), event.getMessageAuthor().getAvatar());
+            CompletableFuture<Void> RESTLatency = event.getApi().measureRestLatency().thenAccept(Time -> {
+                EmbedBuilder InitialPing = new EmbedBuilder()
+                        .setTitle("***Testing Ping... :ping_pong: ***")
+                        .setColor(pingEmbedColor)
+                        .setFooter(event.getMessageAuthor().getDisplayName(), event.getMessageAuthor().getAvatar());
 
-
-               EmbedBuilder PingEmbed = new EmbedBuilder()
-                       .setTitle("**Latency of the Bot:** ")
-                       .setDescription("Current Ping")
-                       .addField("Gateway Latency", "`" + GatewayLatency + "ms" + "`" + "\nTotal Memory: " + "`" +  TotalMemory() + "MB`" + "\nUsed Memory: " + "`" + UsedMemory()  + "`" + "\nUptime: " + "`" + onTime() + "`" + "\nTotal Server: " + "`"+ event.getApi().getServers().size() + " servers`", false)
-                       .setFooter(event.getMessageAuthor().getDisplayName(), event.getMessageAuthor().getAvatar())
-                       .setColor(PingEmbedColor);
-               event.getChannel().sendMessage(InitialPing).thenAccept(MessageToBeEdited -> MessageToBeEdited.getApi().getThreadPool().getScheduler().schedule(() -> {
-                   MessageToBeEdited.edit(PingEmbed);
-               }, 2, TimeUnit.SECONDS));
+                EmbedBuilder PingEmbed = new EmbedBuilder()
+                        .setTitle("**Latency of the Bot:** ")
+                        .setDescription("Current Ping")
+                        .addField("Gateway Latency", "`" + GatewayLatency + "ms" + "`" + "\nTotal Memory: " + "`" +  totalMemory() + "MB`" + "\nUsed Memory: " + "`" + usedMemory()  + "MB`" + "\nUptime: " + "`" + onTime() + "`" + "\nTotal Server: " + "`"+ event.getApi().getServers().size() + " servers`", false)
+                        .setFooter(event.getMessageAuthor().getDisplayName(), event.getMessageAuthor().getAvatar())
+                        .setColor(pingEmbedColor);
+                event.getChannel().sendMessage(InitialPing).thenAccept(MessageToBeEdited -> MessageToBeEdited.getApi().getThreadPool().getScheduler().schedule(() -> {
+                    MessageToBeEdited.edit(PingEmbed);
+                }, 2, TimeUnit.SECONDS));
            });
-       }
+        }
     }
 
     public String onTime() {
@@ -51,12 +50,11 @@ public class Ping implements MessageCreateListener {
         );
     }
 
-    private long TotalMemory() {
-        return (Runtime.getRuntime().totalMemory());
+    private long totalMemory() {
+        return (Runtime.getRuntime().totalMemory() / 1024) / 1024;
     }
 
-    private long UsedMemory() {
-        return (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1000 * 1000);
+    private long usedMemory() {
+        return ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024) / 1024;
     }
-
 }
