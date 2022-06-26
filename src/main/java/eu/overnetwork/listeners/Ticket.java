@@ -12,7 +12,7 @@ public class Ticket implements MessageCreateListener {
     public void onMessageCreate(MessageCreateEvent event) {
         Settings cfg = new Settings();
         if (event.getMessageContent().equalsIgnoreCase(cfg.getPrefix() + "ticket")) {
-            
+            //
         }
     }
 }

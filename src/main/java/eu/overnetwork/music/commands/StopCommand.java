@@ -7,10 +7,10 @@ import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.event.message.MessageCreateEvent;
 
-public class SkipCommand extends ServerCommand {
+public class StopCommand extends ServerCommand {
 
-    public SkipCommand() {
-        super("skip");
+    public StopCommand() {
+        super("stop");
     }
 
     @Override
@@ -18,9 +18,9 @@ public class SkipCommand extends ServerCommand {
         // Checks if there are any audio connection.
         server.getAudioConnection().ifPresentOrElse(connection -> {
 
-            // If there is an audio connection then we skip the track.
+            // If there is an audio connection then we stop the track.
             AudioManager.get(server.getId()).scheduler.nextTrack();
-            event.getChannel().sendMessage("We have skipped the tracked");
+            event.getChannel().sendMessage("We have stopped the tracked");
 
         }, () -> event.getChannel().sendMessage("The bot doesn't seem to be playing any music."));
     }
