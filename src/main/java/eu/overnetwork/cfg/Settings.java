@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class Settings {
 
-    private String prefix = "!";
+    private String Prefix = "!";
     private String ISVT = "***Invite Manager***";
     private String ISD = "Manage your server's invite codes here!";
     private String IVM = "Invite Manager";
