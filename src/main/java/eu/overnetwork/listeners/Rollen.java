@@ -24,7 +24,6 @@ public class Rollen implements MessageCreateListener {
                     .addField(":newspaper:", "News")
                     .addField(":chart_with_upwards_trend:", "Statusmeldungen");
             event.getChannel().sendMessage(rollenembed);
-
         }
     }
 }
