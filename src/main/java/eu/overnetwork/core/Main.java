@@ -18,13 +18,9 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.interaction.MessageComponentInteraction;
-import org.javacord.api.util.logging.FallbackLoggerConfiguration;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
 
