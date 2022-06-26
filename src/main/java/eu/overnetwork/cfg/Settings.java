@@ -28,7 +28,6 @@ public class Settings {
     private String RPCNAME=">help";
     private String RPCURL = "https://youtube.com/watch?v=HtqvyKxD8gY?t=806";
     private String PROFILE = "https://raw.githubusercontent.com/mrtuxa/bot-images/main/over-hosting_new.png";
-    private String database = "mongodb+srv://cluster0.y2v2wyr.mongodb.net/myFirstDatabase";
     public String getPrefix() {
         return prefix;
     }
@@ -243,13 +242,5 @@ public class Settings {
 
     public void setPROFILE(String PROFILE) {
         this.PROFILE = PROFILE;
-    }
-
-    public String getDatabase() {
-        return database;
-    }
-
-    public void setDatabase(String database) {
-        this.database = database;
     }
 }
