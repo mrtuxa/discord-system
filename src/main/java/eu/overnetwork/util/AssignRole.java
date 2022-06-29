@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class AssignRole {
 
-    public AssignRole(@NotNull Server server, User user, long roleId) {
-        server.getRoleById(roleId).ifPresent(role -> role.addUser(user));
+    public AssignRole(@NotNull Server server, User user, long role) {
+        server.getRoleById(role).ifPresent(r -> r.addUser(user));
     }
 }
