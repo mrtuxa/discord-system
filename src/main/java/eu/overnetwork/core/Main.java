@@ -28,7 +28,7 @@ public class Main {
                 .login()
                 .join();
 
-        System.out.println("Connected with " + api.getYourself().getDiscriminatedName());
+        System.out.println("Connected as " + api.getYourself().getDiscriminatedName());
 
         api.addServerVoiceChannelMemberLeaveListener(new ServerVoice());
 
