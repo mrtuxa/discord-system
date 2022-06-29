@@ -9,8 +9,6 @@ import java.awt.*;
 
 public class Verify implements MessageCreateListener {
 
-    private static final String german = ":flag_de:";
-    private static final String english = ":flag_us:";
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
         Settings cfg = new Settings();
