@@ -1,13 +1,10 @@
 package eu.overnetwork.listeners;
 
 import eu.overnetwork.util.CustomEmbedBuilder;
-import org.javacord.api.DiscordApi;
-import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.server.member.ServerMemberJoinEvent;
 import org.javacord.api.listener.server.member.ServerMemberJoinListener;
 
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class ServerJoin implements ServerMemberJoinListener {
@@ -16,7 +13,6 @@ public class ServerJoin implements ServerMemberJoinListener {
      * This method is called every time a user joins a server.
      *
      * @param event The event.
-     *
      */
     @Override
     public void onServerMemberJoin(ServerMemberJoinEvent event) {
