@@ -1,6 +1,6 @@
 package eu.overnetwork.reaction;
 
-import eu.overnetwork.util.AssingRole;
+import eu.overnetwork.util.AssignRole;
 import eu.overnetwork.util.NamesMap;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.server.Server;
@@ -28,17 +28,16 @@ public class VerifyAdd implements ReactionAddListener {
             User user = event.getUser().get();
             String emoji = event.getEmoji().asUnicodeEmoji().orElse("");
 
-            switch (emoji) {
-                case VERIFY:
-                    new AssingRole(server, user, NamesMap.namesMap.get("VERIFY"));
+            if (VERIFY.equals(emoji)) {
+                new AssignRole(server, user, new NamesMap().get("VERIFY"));
 
-                    EmbedBuilder addrole = new EmbedBuilder()
-                            .setTitle("Over-Network System")
-                            .setThumbnail(new File("https://raw.githubusercontent.com/mrtuxa/bot-images/main/over-hosting_new.png"))
-                            .addField("Verify System", "You've verified yourself")
-                            .setColor(Color.BLACK)
-                            .setFooter("over-network");
-                    user.sendMessage(addrole);
+                EmbedBuilder addrole = new EmbedBuilder()
+                        .setTitle("Over-Network System")
+                        .setThumbnail(new File("https://raw.githubusercontent.com/mrtuxa/bot-images/main/over-hosting_new.png"))
+                        .addField("Verify System", "You've verified yourself")
+                        .setColor(Color.BLACK)
+                        .setFooter("over-network");
+                user.sendMessage(addrole);
             }
         }
     }

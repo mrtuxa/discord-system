@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class ServerJoin implements ServerMemberJoinListener {
+
     /**
      * This method is called every time a user joins a server.
      *
@@ -19,10 +20,6 @@ public class ServerJoin implements ServerMemberJoinListener {
      */
     @Override
     public void onServerMemberJoin(ServerMemberJoinEvent event) {
-        Optional<TextChannel> channel = event.getApi().getTextChannelById(987700321155448872L);
-       /* channel.ifPresent(textChannel -> textChannel.sendMessage(*/
-
-
         EmbedBuilder c1 = new EmbedBuilder()
                 .setTitle("Over-Network System")
                 .setAuthor("Over-Network", "https://over-network.eu", "https://raw.githubusercontent.com/mrtuxa/bot-images/main/over-hosting_new.png")
@@ -36,6 +33,5 @@ public class ServerJoin implements ServerMemberJoinListener {
         event.getServer().getTextChannelById(987700321155448872L).ifPresent(serverTextChannel -> serverTextChannel.sendMessage(c2).thenAccept(MessageToBeEdited -> MessageToBeEdited.getApi().getThreadPool().getScheduler().schedule(() -> {
             MessageToBeEdited.edit(c1);
         }, 2, TimeUnit.SECONDS)));
-
     }
 }

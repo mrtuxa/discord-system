@@ -5,12 +5,12 @@ import eu.overnetwork.cfg.Settings;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NamesMap {
-    public static Map<String, Long> namesMap = new HashMap<>();
-    public static void main(String[] args) {
-        Settings cfg = new Settings();
-        namesMap.put(cfg.getVerify(), 987683142192218143L);
-        namesMap.put(cfg.getNEWS(), 987690787074633738L);
-        namesMap.put(cfg.getSTATUSMELDUNGEN(), 987690891198234645L);
+public class NamesMap extends HashMap<String, Long> {
+
+    public NamesMap() {
+        //Settings cfg = new Settings();
+        //put(cfg.getVerify(), 987683142192218143L);
+        //put(cfg.getNEWS(), 987690787074633738L);
+        //put(cfg.getSTATUSMELDUNGEN(), 987690891198234645L);
     }
 }

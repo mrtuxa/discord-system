@@ -20,18 +20,17 @@ public class Language implements MessageCreateListener {
             EmbedBuilder language = new EmbedBuilder()
                     .setTitle("Over-Network System")
                     .addField("Support", "Please choose your language for the support")
-                    .setThumbnail(cfg.getPROFILE())
+                    .setThumbnail(cfg.getProfile())
                     .setFooter("Over-Network System");
 
             event.getChannel().sendMessage(language);
 
-
-            TextChannel buttonchannel = event.getChannel();
+            TextChannel channel = event.getChannel();
             new MessageBuilder()
                     .addComponents(
                             ActionRow.of(Button.success("german", "German"),
                                     Button.danger("english", "English")))
-                    .send(buttonchannel);
+                    .send(channel);
         }
     }
 }
