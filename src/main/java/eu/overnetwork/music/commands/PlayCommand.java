@@ -1,6 +1,6 @@
 package eu.overnetwork.music.commands;
 
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.FunctionalResultHandler;
 import eu.overnetwork.music.audio.AudioManager;
@@ -14,6 +14,7 @@ import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.event.message.MessageCreateEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayCommand extends ServerCommand {
 
@@ -119,7 +120,7 @@ public class PlayCommand extends ServerCommand {
         }));
     }
 
-    private boolean isUrl(String argument){
+    private boolean isUrl(@NotNull String argument){
         return argument.startsWith("https://") || argument.startsWith("http://");
     }
 }

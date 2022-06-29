@@ -1,12 +1,12 @@
 package eu.overnetwork.util;
 
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.util.logging.ExceptionLogger;
 import eu.overnetwork.core.Constant;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
@@ -30,13 +30,13 @@ public class LatestVersionFinder {
      */
     public LatestVersionFinder(DiscordApi api) {
         this.api = api;
-        // Populate with latest version
+        // Populate with the latest version
         CompletableFuture.supplyAsync(this::getAndUpdateVersionSync, api.getThreadPool().getExecutorService())
                 .exceptionally(ExceptionLogger.get());
     }
 
     /**
-     * Obtain the latest release version of Javacord.
+     * Obtain the latest release version of JavaCord.
      *
      * <p>If the version cannot be obtained, the last successfully retrieved version will be used instead.
      *
@@ -48,6 +48,7 @@ public class LatestVersionFinder {
                 .exceptionally(ExceptionLogger.get().andThen(value -> latestVersion));
     }
 
+    @NotNull
     private String getAndUpdateVersionSync() {
         Request request = new Request.Builder()
                 .url(Constant.LATEST_VERSION_URL)

@@ -1,14 +1,12 @@
 package eu.overnetwork.reaction;
 
 import com.vdurmont.emoji.EmojiParser;
-import eu.overnetwork.util.AssingRole;
 import eu.overnetwork.util.NamesMap;
 import eu.overnetwork.util.RemoveRole;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
-import org.javacord.api.event.message.reaction.ReactionAddEvent;
 import org.javacord.api.event.message.reaction.ReactionRemoveEvent;
 import org.javacord.api.listener.message.reaction.ReactionRemoveListener;
 
@@ -37,29 +35,28 @@ public class RollenRemove implements ReactionRemoveListener {
 
         if (event.getServer().isPresent() && event.getServer().isPresent()) {
             Server server = event.getServer().get();
-            User user = event.getUser().get();
+            User user = event.getUser().orElse(null);
             String emoji = event.getEmoji().asUnicodeEmoji().orElse("");
 
 
             switch (emoji) {
-
-                case NEWS:
-                    new RemoveRole(server, user, NamesMap.namesMap.get("NEWS"));
+                case NEWS -> {
+                    new RemoveRole(server, user, new NamesMap().get("NEWS"));
                     user.sendMessage(new EmbedBuilder()
                             .setTitle("Over-Network System")
                             .setThumbnail("https://raw.githubusercontent.com/mrtuxa/bot-images/main/over-hosting_new.png")
                             .addField("Rollenvergabe", "You've removed yourself to the Statusmeldungen Ping Role")
                             .setFooter("Over-Network"));
-                    break;
-                case STATUSMELDUNGEN:
-                    new RemoveRole(server, user, NamesMap.namesMap.get("STATUSMELDUNGEN"));
+                }
+                case STATUSMELDUNGEN -> {
+                    new RemoveRole(server, user, new NamesMap().get("STATUSMELDUNGEN"));
                     user.sendMessage(new EmbedBuilder()
                             .setTitle("Over-Network System")
                             .setThumbnail(new File("https://raw.githubusercontent.com/mrtuxa/bot-images/main/over-hosting_new.png"))
                             .addField("Rollenvergabe", "You've removed yourself to the Statusmeldungen Ping Role")
                             .setFooter("Over-Network"));
+                }
             }
-
         }
     }
 }

@@ -2,14 +2,11 @@ package eu.overnetwork.util;
 
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
+import org.jetbrains.annotations.NotNull;
 
 public class RemoveRole {
 
-    private static Server server;
-    private static User user;
-    private static Long roleID;
-
-    public RemoveRole(Server server, User user, Long news) {
-        server.getRoleById(roleID).ifPresent(role -> role.removeUser(user));
+    public RemoveRole(@NotNull Server server, User user, long roleId) {
+        server.getRoleById(roleId).ifPresent(role -> role.removeUser(user));
     }
 }
