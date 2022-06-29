@@ -1,9 +1,6 @@
 package eu.overnetwork.util;
 
-import eu.overnetwork.cfg.Settings;
-
 import java.util.HashMap;
-import java.util.Map;
 
 public class NamesMap extends HashMap<String, Long> {
 

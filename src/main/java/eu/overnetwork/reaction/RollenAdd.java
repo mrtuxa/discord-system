@@ -13,13 +13,8 @@ import org.javacord.api.listener.message.reaction.ReactionAddListener;
 import java.io.File;
 
 public class RollenAdd implements ReactionAddListener {
-
-    private static final String VERIFY = "✅";
     private static final String NEWS = "\uD83D\uDCF0";
     private static final String STATUSMELDUNGEN = "\uD83D\uDCC8";
-
-    private static final String german = ":flag_de:";
-    private static final String english = ":flag_us:";
 
     /**
      * This method is called every time a reaction is added to a message.
