@@ -21,15 +21,15 @@ public class Tags implements MessageCreateListener {
     public void onMessageCreate(MessageCreateEvent event) {
         Settings cfg = new Settings();
         if (event.getMessageContent().equalsIgnoreCase(cfg.getPrefix() + "tags")) {
-         EmbedBuilder c1 = new CustomEmbedBuilder()
-                 .setTitle(event.getMessageAuthor().getAvatar() + event.getMessageAuthor().getDiscriminatedName())
-                 .addField("Tags", "`bild-drehen`, `frage-stellen`, `keine-reaktionen`");
-         event.getChannel().sendMessage(c1);
+            EmbedBuilder c1 = new CustomEmbedBuilder()
+                    .setTitle(event.getMessageAuthor().getAvatar() + event.getMessageAuthor().getDiscriminatedName())
+                    .addField("Tags", "`bild-drehen`, `frage-stellen`, `keine-reaktionen`");
+            event.getChannel().sendMessage(c1);
         } else if (event.getMessageContent().equalsIgnoreCase(cfg.getPrefix() + "tag bild-drehen")) {
             EmbedBuilder c1 = new CustomEmbedBuilder()
                     .setTitle(event.getMessageAuthor().getAvatar() + event.getMessageAuthor().getDiscriminatedName())
                     .addField("Bild Drehen", "Es wäre super, wenn du das Bild nochmal richtig rum reinschicken kannst, damit wir dir besser bei deinem Problem helfen können.");
-        event.getChannel().sendMessage(c1);
+            event.getChannel().sendMessage(c1);
         } else if (event.getMessageContent().equalsIgnoreCase(cfg.getPrefix() + "tag frage-stellen")) {
             TextChannel frage = event.getChannel();
             MessageBuilder c1 = new MessageBuilder()

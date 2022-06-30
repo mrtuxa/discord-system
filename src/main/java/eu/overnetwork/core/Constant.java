@@ -16,5 +16,6 @@ public final class Constant {
     public static final long TALK_TO_JAMES = 989851218757169213L;
 
     public static final String LATEST_VERSION_URL = "https://repo1.maven.org/maven2/org/javacord/javacord/maven-metadata.xml";
+
     private void Constants() { /* nope */ }
 }
