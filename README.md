@@ -2,4 +2,4 @@
 
 ## Installation
 
-[sdkman](https://sdkman.io/install)
+- [sdkman](https://sdkman.io/install)
