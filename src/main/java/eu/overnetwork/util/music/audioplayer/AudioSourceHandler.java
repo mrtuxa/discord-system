@@ -1,0 +1,58 @@
+package eu.overnetwork.util.music.audioplayer;
+
+import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
+import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
+import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+
+public class AudioSourceHandler implements AudioLoadResultHandler {
+    /**
+     * The audio source to which the audio player is connected to
+     */
+    public final PlayerAudioSource playerAudioSource;
+
+    /**
+     * Constructor for this class
+     * @param playerAudioSource an audio source for this audio source handler
+     */
+    public AudioSourceHandler(PlayerAudioSource playerAudioSource){
+        this.playerAudioSource = playerAudioSource;
+    }
+
+    /**
+     * Method to load a track
+     * @param track The loaded track
+     */
+    @Override
+    public void trackLoaded(AudioTrack track) {
+        this.playerAudioSource.audioPlayer.playTrack(track);
+    }
+
+    /**
+     * Method to load a playlist
+     * @param playlist The loaded playlist
+     */
+    @Override
+    public void playlistLoaded(AudioPlaylist playlist) {
+        for (AudioTrack track: playlist.getTracks()){
+            this.playerAudioSource.audioPlayer.playTrack(track);
+        }
+    }
+
+    /**
+     * Method to call in case of no matched audio sources
+     */
+    @Override
+    public void noMatches() {
+        System.out.println("Audio Load Result - No matches found!");
+    }
+
+    /**
+     * Method to call in case of an exception occurring during track or playlist loading
+     * @param exception The exception that was thrown
+     */
+    @Override
+    public void loadFailed(FriendlyException exception) {
+        System.out.println("An error has occurred while loading the requested audio");
+    }
+}
