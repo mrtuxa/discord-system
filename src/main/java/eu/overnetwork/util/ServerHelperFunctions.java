@@ -22,7 +22,7 @@ public class ServerHelperFunctions {
            System.out.println("Server model present, getting server model...");
             discordServer = serverModel.get();
         } else {
-           System.out.println("Server model not present, returning null...");
+           Main.logger.error("Server model not present, returning null...");
         }
         return discordServer;
     }
