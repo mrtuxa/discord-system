@@ -33,12 +33,12 @@ public class ServerHelperFunctions {
      * @param commandName String of the command to be deleted
      */
     public static void removeGlobalSlashCommand(DiscordApi api, String commandName){
-        System.out.println(String.format("Request to remove a global slash command by the name '%s' received", commandName));
+        Main.logger.error(String.format("Request to remove a global slash command by the name '%s' received", commandName));
         boolean commandFound = false;
         List<SlashCommand> slashCommands = api
                 .getGlobalSlashCommands()
                 .exceptionally(exception -> {   // Error message for failing to get the list of global slash commands
-                    System.out.println("Unable to retrieve list of global slash commands!");
+                    Main.logger.error("Unable to retrieve list of global slash commands!");
                     return null;
                 })
                 .join();
@@ -49,14 +49,14 @@ public class ServerHelperFunctions {
                 SlashCommand commandToBeRemoved = api
                         .getGlobalSlashCommandById(commandId)
                         .exceptionally(exception -> {   // Error message for failing to get global slash command by command id
-                            System.out.println("Unable to retrieve global slash command by id!");
+                            Main.logger.error("Unable to retrieve global slash command by id!");
                             return null;
                         })
                         .join();
                 commandToBeRemoved
                         .deleteGlobal()
                         .exceptionally(exception -> {   // Error message for failing to delete command that needed to be removed
-                            System.out.println("Unable to delete the requested global slash command!");
+                            Main.logger.error("Unable to delete the requested global slash command!");
                             return null;
                         })
                         .join();
@@ -64,10 +64,10 @@ public class ServerHelperFunctions {
             }
         }
         if (commandFound){
-            System.out.println("The requested command was successfully found and deleted");
+            Main.logger.info("The requested command was successfully found and deleted");
         }
         else{
-            System.out.println("The requested command was NOT found");
+            Main.logger.error("The requested command was NOT found");
         }
     }
 }

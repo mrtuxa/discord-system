@@ -5,6 +5,7 @@ import com.sedmelluq.discord.lavaplayer.player.event.*;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
+import eu.overnetwork.core.Main;
 import eu.overnetwork.util.CommandFunctions;
 import eu.overnetwork.util.music.audioplayer.youtube.YouTubeSearchEngine;
 import org.javacord.api.entity.channel.ServerVoiceChannel;
@@ -118,8 +119,8 @@ public class TrackScheduler implements AudioEventListener {
             }
         }
 
-        System.out.println(String.format("Track successfully added to queue: %b", addedToQueue));
-        System.out.println(String.format("Queue size: %d", this.trackQueue.size()));
+        Main.logger.info(String.format("Track successfully added to queue: %b", addedToQueue));
+        Main.logger.info(String.format("Queue size: %d", this.trackQueue.size()));
 
         this.sendMessageEmbed(embed);
     }
@@ -133,8 +134,8 @@ public class TrackScheduler implements AudioEventListener {
         if(!this.audioPlayer.startTrack(track, true)){
             addedToQueue = this.trackQueue.offerFirst(track);
         }
-        System.out.println(String.format("Track successfully jumped the queue: %b", addedToQueue));
-        System.out.println(String.format("Queue size: %d", this.trackQueue.size()));
+        Main.logger.info(String.format("Track successfully jumped the queue: %b", addedToQueue));
+        Main.logger.info(String.format("Queue size: %d", this.trackQueue.size()));
     }
 
     /**
@@ -152,7 +153,8 @@ public class TrackScheduler implements AudioEventListener {
     private Runnable botDisconnect(){
         return () -> this.serverVoiceChannel.disconnect()
                 .exceptionally(exception -> {
-                    System.out.println("An error occurred when trying to disconnect from a voice channel");
+                    Main.logger.error("An error occurred when trying to disconnect from a voice channel");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 });
     }
@@ -166,7 +168,8 @@ public class TrackScheduler implements AudioEventListener {
                 .addComponents(PlayerControlsHandler.playerActionRow)
                 .send(this.textChannel)
                 .exceptionally(exception -> {
-                    System.out.println("Error trying to send embed!");
+                    Main.logger.error("Error trying to send embed!");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 });
     }
@@ -180,7 +183,7 @@ public class TrackScheduler implements AudioEventListener {
             this.scheduledExecutorService = Executors.newScheduledThreadPool(1);
         }
         this.scheduledExecutorService.schedule(task, 1, TimeUnit.MINUTES);
-        System.out.println("The bot disconnect scheduler has been reset and restarted");
+        Main.logger.info("The bot disconnect scheduler has been reset and restarted");
     }
 
     /**
@@ -189,9 +192,9 @@ public class TrackScheduler implements AudioEventListener {
     private void botDisconnectTimerPauseSequence(){
         this.scheduledExecutorService.shutdownNow();
         if (this.scheduledExecutorService.isShutdown()){
-            System.out.println("The bot disconnect scheduler has been shutdown intermittently and can be reset now");
+           Main.logger.info("The bot disconnect scheduler has been shutdown intermittently and can be reset now");
         } else {
-            System.out.println("The bot disconnect scheduler has not been shutdown intermittently");
+            Main.logger.info("The bot disconnect scheduler has not been shutdown intermittently");
         }
     }
 
@@ -253,7 +256,8 @@ public class TrackScheduler implements AudioEventListener {
      * @param exception the exception that was encountered
      */
     private void onTrackException(AudioTrack track, FriendlyException exception) {
-        System.out.println(String.format("Error during playback of the following track '%s'", track.getIdentifier()));
+        Main.logger.error(String.format("Error during playback of the following track '%s'", track.getIdentifier()));
+        Main.logger.error(exception.getMessage());
     }
 
     /**
@@ -263,7 +267,7 @@ public class TrackScheduler implements AudioEventListener {
      * @param stackTrace the associated stack trace
      */
     private void onTrackStuck(AudioTrack track, long thresholdMs, StackTraceElement[] stackTrace) {
-        System.out.println(String.format("Error during playback of the following track '%s' at threshold '%d'",
+        Main.logger.error(String.format("Error during playback of the following track '%s' at threshold '%d'",
                 track.getIdentifier(),
                 thresholdMs));
         StringBuilder errorMessage = new StringBuilder();

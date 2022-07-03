@@ -1,5 +1,6 @@
 package eu.overnetwork.cmd.fun;
 
+import eu.overnetwork.core.Main;
 import eu.overnetwork.util.Command;
 import eu.overnetwork.util.CommandFunctions;
 import org.javacord.api.entity.message.MessageBuilder;
@@ -24,7 +25,8 @@ public class SimpRate implements Command {
                             .setColor(Color.BLACK))
                     .send(event.getChannel())
                     .exceptionally(exception -> {   // Error message for failing to respond to the guild command
-                        System.out.println("Unable to respond to the guild command!");
+                        Main.logger.error("Unable to respond to the guild command!");
+                        Main.logger.error(exception.getMessage());
                         return null;
                     });
     }
@@ -43,7 +45,8 @@ public class SimpRate implements Command {
                         .setColor(Color.BLACK))
                 .respond()
                 .exceptionally(exception -> {   // Error message for failing to respond to the slash command
-                    System.out.println("Unable to respond to the slash command!");
+                    Main.logger.error("Unable to respond to the slash command!");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 })
         );

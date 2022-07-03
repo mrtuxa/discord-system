@@ -1,5 +1,6 @@
 package eu.overnetwork.util.SlashCommandCustomizers;
 
+import eu.overnetwork.core.Main;
 import org.javacord.api.interaction.SlashCommandBuilder;
 
 public class SlashCommandCustomizer extends SlashCommandCustomizerInterface{
@@ -22,7 +23,7 @@ public class SlashCommandCustomizer extends SlashCommandCustomizerInterface{
             if (this.getSubCommandGroupList().isEmpty()){
                 if (this.getOptionList().isEmpty()){
                     // Option-less slash command handling perhaps? -> not required
-                    System.out.println(String.format("No options set for this slash command: %s", this.command.toString()));
+                    Main.logger.error(String.format("No options set for this slash command: %s", this.command.toString()));
                 }
                 else {
                     this.command.setOptions(this.getOptionList());

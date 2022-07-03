@@ -3,6 +3,7 @@ package eu.overnetwork.util.music.audioplayer;
 import com.google.api.services.youtube.model.VideoSnippet;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import eu.overnetwork.cfg.Settings;
+import eu.overnetwork.core.Main;
 import eu.overnetwork.util.CommandFunctions;
 import eu.overnetwork.util.music.audioplayer.youtube.YouTubeSearchEngine;
 import org.javacord.api.entity.message.MessageBuilder;
@@ -64,7 +65,8 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                                 .setThumbnail(new File("over-hosting_new.png")))
                         .addComponents(playerActionRow).send()
                         .exceptionally(exception -> {
-                            System.out.println("Unable to respond to this interaction!");
+                            Main.logger.error(cfg.getUnabletoresponse());
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
             } else{
@@ -76,12 +78,13 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                                 .setThumbnail(new File("over-hosting_new.png")))
                         .addComponents(playerActionRow).send()
                         .exceptionally(exception -> {
-                            System.out.println(cfg.getUnabletoresponse());
+                            Main.logger.error(cfg.getUnabletoresponse());
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
             }
         }).exceptionally(exception -> {
-            System.out.println("Unable to register play/pause action!");
+            Main.logger.error("Unable to register play/pause action!");
             return null;
         });
     }
@@ -97,7 +100,8 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                                 .setColor(Color.BLACK)
                                 .setThumbnail(new File("over-hosting_new.png"))).send()
                         .exceptionally(exception -> {
-                            System.out.println("Unable to respond to this interaction!");
+                            Main.logger.error("Unable to respond to this interaction!");
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
                 this.audioSourceHandler.playerAudioSource.trackScheduler.nextTrack();
@@ -110,12 +114,14 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                         .addComponents(playerActionRow)
                         .send()
                         .exceptionally(exception -> {
-                            System.out.println("Unable to respond to this interaction!");
+                            Main.logger.error("Unable to respond to this interaction!");
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
             }
         }).exceptionally(exception -> {
-            System.out.println("Unable to register skip forward action!");
+            Main.logger.error("Unable to register skip forward action!");
+            Main.logger.error(exception.getMessage());
             return null;
         });
     }
@@ -134,7 +140,8 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                                 .setColor(Color.BLACK)
                                 .setThumbnail(new File("over-hosting_new.png"))).send()
                         .exceptionally(exception -> {
-                            System.out.println("Unable to respond to this interaction!");
+                            Main.logger.error("Unable to respond to this interaction!");
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
                 this.audioSourceHandler.playerAudioSource.trackScheduler.jump(nextTrack.makeClone());
@@ -148,12 +155,14 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                         .addComponents(playerActionRow)
                         .send()
                         .exceptionally(exception -> {
-                            System.out.println(cfg.getUnabletoresponse());
+                            Main.logger.error(cfg.getUnabletoresponse());
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
             }
         }).exceptionally(exception -> {
-            System.out.println("Unable to register skip to previous action!");
+            Main.logger.error("Unable to register skip to previous action!");
+            Main.logger.error(exception.getMessage());
             return null;
         });
     }
@@ -196,7 +205,8 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                                 .setThumbnail(new File("over-hosting_new.png")))
                         .addComponents(playerActionRow).send()
                         .exceptionally(exception -> {
-                            System.out.println(cfg.getUnabletoresponse());
+                            Main.logger.error(cfg.getUnabletoresponse());
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
             } else {
@@ -210,14 +220,16 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                             .addComponents(playerActionRow)
                             .send()
                             .exceptionally(exception -> {
-                                System.out.println(cfg.getUnabletoresponse());
+                                Main.logger.error(cfg.getUnabletoresponse());
+                                Main.logger.error(exception.getMessage());
                                 return null;
                             });
                 } else {
                     componentInteraction.createFollowupMessageBuilder().addEmbed(startingEmbed)
                             .send()
                             .exceptionally(exception -> {
-                                System.out.println("Unable to respond to this interaction!");
+                                Main.logger.error("Unable to respond to this interaction!");
+                                Main.logger.error(exception.getMessage());
                                 return null;
                             });
                 }
@@ -235,7 +247,8 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                             .setThumbnail(new File("over-hosting_new.png")))
                     .send(componentInteraction.getChannel().orElse(null))
                     .exceptionally(exception -> {
-                        System.out.println("Unable to respond to this interaction!");
+                        Main.logger.error("Unable to respond to this interaction!");
+                        Main.logger.error(exception.getMessage());
                         return null;
                     });
         }
@@ -257,7 +270,8 @@ public class PlayerControlsHandler implements MessageComponentCreateListener {
                     .addComponents(playerActionRow)
                     .send()
                     .exceptionally(exception -> {
-                        System.out.println("Unable to register clear track queue action!");
+                        Main.logger.error("Unable to register clear track queue action!");
+                        Main.logger.error(exception.getMessage());
                         return null;
                     });
         });

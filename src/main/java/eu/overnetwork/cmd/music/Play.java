@@ -54,7 +54,7 @@ public class Play implements Command {
         Main.VoiceConnectionStatus voiceConnectionStatusState = Main.VoiceConnectionStatus.Unsuccessful;
         long senderId = user.getId();
         if (server.getConnectedVoiceChannel(senderId).isPresent()) {
-            System.out.println(String.format("Bot connection status: Is connected = %b",
+            Main.logger.info(String.format("Bot connection status: Is connected = %b",
                     server.getConnectedVoiceChannel(senderId).get().isConnected(api.getYourself())));
             if (server.getConnectedVoiceChannel(senderId).get().isConnected(api.getYourself())) {
                 voiceConnectionStatusState = Main.VoiceConnectionStatus.AlreadyConnected;
@@ -72,7 +72,7 @@ public class Play implements Command {
                         this.serverVoiceChannel = voiceChannel;
                         voiceConnectionStatusState = Main.VoiceConnectionStatus.Successful;
                     } else {
-                        System.out.println(String.format("Bot connection status: Is connected = %b",
+                        Main.logger.info(String.format("Bot connection status: Is connected = %b",
                                 voiceChannel.isConnected(api.getYourself())));
                         if (voiceChannel.isConnected(api.getYourself())) {
                             voiceConnectionStatusState = Main.VoiceConnectionStatus.AlreadyConnected;
@@ -127,7 +127,8 @@ public class Play implements Command {
             voiceChannel.connect()
                     .thenAccept(audioConnection -> audioConnection.setAudioSource(source))
                     .exceptionally(exception -> {
-                        System.out.println("Unexpected error trying to play the requested audio!");
+                        Main.logger.error("Unexpected error trying to play the requested audio!");
+                        Main.logger.error(exception.getMessage());
                         return null;
                     });
         }
@@ -188,7 +189,7 @@ public class Play implements Command {
         EmbedBuilder functionResponse = connectionResponse.second();
         PlayerAudioSource playerAudioSource = new PlayerAudioSource(api, this.textChannel, this.serverVoiceChannel, audioPlayerManager);
         connectToSource(this.serverVoiceChannel, voiceConnectionStatus, playerAudioSource);
-        System.out.println(String.format("VoiceConnectionStatus = %s", voiceConnectionStatus));
+        Main.logger.info(String.format("VoiceConnectionStatus = %s", voiceConnectionStatus));
 
         if (voiceConnectionStatus.equals(Main.VoiceConnectionStatus.Successful)){
             this.audioSourceHandler = new AudioSourceHandler(playerAudioSource);
@@ -253,7 +254,8 @@ public class Play implements Command {
                                 .setThumbnail(new File("over-hosting_new.png")))
                         .send(this.textChannel)
                         .exceptionally(exception -> {
-                            System.out.println("Unable to respond to the guild command!");
+                            Main.logger.error("Unable to respond to the guild command!");
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
             } else {
@@ -265,7 +267,8 @@ public class Play implements Command {
                 new MessageBuilder().addEmbed(response)
                         .send(this.textChannel)
                         .exceptionally(exception -> {
-                            System.out.println("Unable to respond to the guild command!");
+                            Main.logger.error("Unable to respond to the guild command!");
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
             }
@@ -280,7 +283,8 @@ public class Play implements Command {
                                 .setThumbnail(new File("over-hosting_new.png")))
                         .send(this.textChannel)
                         .exceptionally(exception -> {
-                            System.out.println("Unable to respond to the guild command!");
+                            Main.logger.error("Unable to respond to the guild command!");
+                            Main.logger.error(exception.getMessage());
                             return null;
                         });
             } else {
@@ -293,11 +297,12 @@ public class Play implements Command {
                                     .setThumbnail(new File("over-hosting_new.png")))
                             .send(this.textChannel)
                             .exceptionally(exception -> {
-                                System.out.println("Unable to respond to the guild command!");
+                                Main.logger.error("Unable to respond to the guild command!");
+                                Main.logger.error(exception.getMessage());
                                 return null;
                             });
                 } else {
-                    System.out.println("Guild play command has not received a search string as one of its arguments!");
+                    Main.logger.error("Guild play command has not received a search string as one of its arguments!");
                     new MessageBuilder().addEmbed(new EmbedBuilder()
                                     .setTitle("Missing search string argument!")
                                     .setDescription("Along with the play command and it's other arguments, pass in a search string surrounded in double quotes as shown: **\"<search string>\"**")
@@ -305,7 +310,8 @@ public class Play implements Command {
                                     .setThumbnail(new File("over-hosting_new.png")))
                             .send(this.textChannel)
                             .exceptionally(exception -> {
-                                System.out.println("Unable to respond to the guild command!");
+                                Main.logger.error("Unable to respond to the guild command!");
+                                Main.logger.error(exception.getMessage());
                                 return null;
                             });
                 }

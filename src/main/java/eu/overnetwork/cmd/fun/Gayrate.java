@@ -1,8 +1,8 @@
 package eu.overnetwork.cmd.fun;
 
+import eu.overnetwork.core.Main;
 import eu.overnetwork.util.Command;
 import eu.overnetwork.util.CommandFunctions;
-import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageBuilder;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.server.Server;
@@ -46,7 +46,8 @@ public class Gayrate implements Command {
                         .setColor(Color.BLACK))
                 .respond()
                 .exceptionally(exception -> {
-                    System.out.println("Unable to respont to the slash command interaction");
+                    Main.logger.error("Unable to respont to the slash command interaction");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 })
         );

@@ -6,6 +6,7 @@ import eu.overnetwork.cmd.fun.SimpRate;
 import eu.overnetwork.cmd.music.Play;
 import eu.overnetwork.cmd.utils.PingCommand;
 import eu.overnetwork.cmd.utils.Prefix;
+import eu.overnetwork.core.Main;
 import eu.overnetwork.handler.cmd.CommandHandler;
 import eu.overnetwork.util.SlashCommandCustomizers.SlashCommandCustomizer;
 import org.javacord.api.DiscordApi;
@@ -29,7 +30,8 @@ public class CommandRegister {
                         new PingCommand())
                 .createGlobal(api)
                 .exceptionally(exception -> {   // Error message for failing to register the slash command to the registry
-                    System.out.println("Unable to register slash command to the registry");
+                    Main.logger.error("Unable to register slash command to the registry");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 })
                 .join();
@@ -39,7 +41,8 @@ public class CommandRegister {
                         new Gayrate())
                 .createGlobal(api)
                 .exceptionally(exception -> {   // Error message for failing to register the slash command to the registry
-                    System.out.println("Unable to register slash command to the registry");
+                    Main.logger.error("Unable to register slash command to the registry");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 })
                 .join();
@@ -49,7 +52,8 @@ public class CommandRegister {
                         new SimpRate())
                 .createGlobal(api)
                 .exceptionally(exception -> {   // Error message for failing to register the slash command to the registry
-                    System.out.println("Unable to register slash command to the registry");
+                    Main.logger.error("Unable to register slash command to the registry");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 })
                 .join();
@@ -65,7 +69,8 @@ public class CommandRegister {
         prefixCommandCustomizer.setCustomizations()
                 .createGlobal(api)
                 .exceptionally(exception -> {   // Error message for failing to register the customized slash command to the registry
-                    System.out.println("Unable to register customized slash command to the registry");
+                    Main.logger.error("Unable to register customized slash command to the registry");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 })
                 .join();
@@ -75,7 +80,8 @@ public class CommandRegister {
                         new Help())
                 .createGlobal(api)
                 .exceptionally(exception -> {   // Error message for failing to register the slash command to the registry
-                    System.out.println("Unable to register slash command to the registry");
+                    Main.logger.error("Unable to register slash command to the registry");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 })
                 .join();
@@ -98,7 +104,8 @@ public class CommandRegister {
         playCommandCustomizer.setCustomizations()
                 .createGlobal(api)
                 .exceptionally(exception -> {   // Error message for failing to register the customized slash command to the registry
-                    System.out.println("Unable to register customized slash command to the registry");
+                    Main.logger.error("Unable to register customized slash command to the registry");
+                    Main.logger.error(exception.getMessage());
                     return null;
                 })
                 .join();

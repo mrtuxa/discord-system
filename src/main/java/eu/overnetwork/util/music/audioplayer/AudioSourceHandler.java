@@ -4,6 +4,7 @@ import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import eu.overnetwork.core.Main;
 
 public class AudioSourceHandler implements AudioLoadResultHandler {
     /**
@@ -44,7 +45,7 @@ public class AudioSourceHandler implements AudioLoadResultHandler {
      */
     @Override
     public void noMatches() {
-        System.out.println("Audio Load Result - No matches found!");
+        Main.logger.info("Audio Load Result - No matches found!");
     }
 
     /**
@@ -53,6 +54,7 @@ public class AudioSourceHandler implements AudioLoadResultHandler {
      */
     @Override
     public void loadFailed(FriendlyException exception) {
-        System.out.println("An error has occurred while loading the requested audio");
+       Main.logger.error("An error has occurred while loading the requested audio");
+       Main.logger.error(exception.getMessage());
     }
 }

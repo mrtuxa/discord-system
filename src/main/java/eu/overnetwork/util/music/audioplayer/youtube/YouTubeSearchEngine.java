@@ -2,6 +2,7 @@ package eu.overnetwork.util.music.audioplayer.youtube;
 
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
+import eu.overnetwork.core.Main;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.io.IOException;
@@ -40,7 +41,9 @@ public class YouTubeSearchEngine {
                     .setKey(dotenv.get("YoutubeApiKey"))
                     .execute();
         } catch (IOException exception) {
-            System.out.println("Error trying to search Youtube!");
+            Main.logger.error("Error trying to search Youtube!");
+            Main.logger.error(exception.getMessage());
+            this.youtube = null;
         }
 
         assert searchResponse != null;
@@ -63,7 +66,8 @@ public class YouTubeSearchEngine {
                      .setKey(dotenv.get("YoutubeApiKey"))
                      .execute();
          } catch (IOException exception) {
-             System.out.println("Error trying to retrieve Youtube API VideoListResponse!");
+             Main.logger.error("Error trying to retrieve Youtube API VideoListResponse!");
+             Main.logger.error(exception.getMessage());
          }
          assert response != null;
          Video result = response.getItems().get(0);

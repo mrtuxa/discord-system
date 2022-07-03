@@ -24,8 +24,4 @@ public class CommandFunctions {
     public static int randomRate() {
         return (int)(Math.random()*100+1);
     }
-
-    public static void under20() {
-        File under20 = new File("worlds-leading-anxiety-expert-found-curing-people-2-8748-1448032226-1_dblbig.jpg");
-    }
 }
