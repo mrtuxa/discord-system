@@ -145,7 +145,7 @@
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-youtube</artifactId>
-            <version>v3-rev20220612-1.32.1</version>
+            <version>v3-rev20220719-2.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.http-client</groupId>
